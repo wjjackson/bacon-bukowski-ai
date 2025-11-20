@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Bacon x Bukowski Image Generator</title>
+  <title>Charcoal + Chalk – Bacon x Bukowski</title>
   <style>
     body {
       font-family: monospace;
@@ -42,61 +42,98 @@
     let currentPrompt = '';
 
     const scenes = [
-      "a typewriter surrounded by cigarette smoke",
-      "a woman gazing out a cracked window at dusk",
-      "an old man slouched beside a flickering TV",
-      "a bookshelf drowning in dust and poetry",
-      "a self-portrait sketched in shadow behind a doorframe",
-      "a wine glass shattered on a motel carpet",
-      "a rain-soaked camera left on a fire escape",
-      "a pair of empty boots facing a mirror",
       "a handwritten letter pinned to a corkboard with a knife",
-      "a naked lightbulb dangling over scattered pages"
+      "a darkened hallway echoing with unspoken regrets",
+      "a wine-stained bedsheet in a dimly lit room",
+      "a subway bench under flickering fluorescence",
+      "a cluttered writing desk beside a broken window",
+      "a bar with one working light and no exits",
+      "a woman staring through rain-fogged glass",
+      "a man slouched in a cracked leather chair",
+      "an empty stage after the final act",
+      "a mirror hanging by a single nail",
+      "a motel TV playing static",
+      "a lone chair in a concrete basement",
+      "a door frame without a door",
+      "a typewriter in a smoke-filled room",
+      "a flickering neon sign spelling nothing",
+      "an ashtray full of questions"
     ];
 
     const emotions = [
-      "gritty solitude",
-      "drunken confession",
-      "tender alienation",
-      "repressed fury",
-      "fugitive intimacy",
-      "haunted reverence",
       "numb resistance",
-      "silent rage",
-      "bleeding vulnerability",
-      "disoriented love"
+      "existential ache",
+      "drunken clarity",
+      "cynical warmth",
+      "grimy nostalgia",
+      "paranoid detachment",
+      "reluctant hope",
+      "violent calm",
+      "sullen rage",
+      "resigned loneliness"
     ];
 
-    const objects = [
-      "a broken typewriter",
-      "an overflowing ashtray",
-      "a half-empty bottle of red wine",
-      "a notebook with pages torn out",
-      "a shadow in a mirror",
-      "a pair of cracked glasses",
-      "a fountain pen leaking ink",
+    const symbols = [
       "a stack of worn Bukowski novels",
-      "a polaroid fading in sunlight",
-      "a key with no door"
+      "a smoldering cigarette with red lipstick",
+      "a broken bottle of absinthe",
+      "an analog clock with no hands",
+      "a photograph ripped in half",
+      "an empty birdcage",
+      "a torn page from a poetry book",
+      "an overflowing ashtray",
+      "a wine glass filled with ink",
+      "a mirror that reflects nothing",
+      "a reel of undeveloped film",
+      "a diary locked shut",
+      "an old camera with no film",
+      "a pen with dried blood instead of ink",
+      "a bookshelf missing its middle",
+      "a single shoe turned toward the wall"
     ];
 
     const quotes = [
       `"Find what you love and let it kill you." – Bukowski`,
       `"We are all born mad. Some remain so." – Bacon`,
-      `"Some people never go crazy. What truly horrible lives they must lead." – Bukowski`,
+      `"What matters most is how well you walk through the fire." – Bukowski`,
       `"I paint to disturb people." – Bacon`,
+      `"We're all going to die, all of us, what a circus!" – Bukowski`,
+      `"I believe in deeply ordered chaos." – Bacon`,
+      `"An intellectual says a simple thing in a hard way. An artist says a hard thing in a simple way." – Bukowski`,
+      `"I'm not interested in the logic of happy endings." – Bacon`,
+      `"There's a bluebird in my heart that wants to get out." – Bukowski`,
+      `"Champions aren’t made in gyms. Champions are made from something they have deep inside them." – Bukowski`,
+      `"My work is the only ground I've ever had to stand on." – Bacon`,
+      `"The job of the artist is always to deepen the mystery." – Bacon`,
+      `"Some people never go crazy. What truly horrible lives they must lead." – Bukowski`,
+      `"Too sensitive to live, too stubborn to die." – Bukowski`,
       `"You have to die a few times before you can really live." – Bukowski`,
-      `"The job of the artist is always to deepen the mystery." – Bacon`
+      `"If you're going to try, go all the way. Otherwise, don't even start." – Bukowski`,
+      `"I think of my art as a form of exorcism." – Bacon`,
+      `"The nights you fight best are when all the weapons are pointed at you." – Bukowski`,
+      `"I don't believe in optimism. I think it's insane." – Bacon`,
+      `"Poetry is what happens when nothing else can." – Bukowski`,
+      `"I never met another man I'd rather be. And even if that's a delusion, it's a lucky one." – Bukowski`
     ];
 
     function generatePrompt() {
       const scene = scenes[Math.floor(Math.random() * scenes.length)];
       const emotion = emotions[Math.floor(Math.random() * emotions.length)];
-      const object = objects[Math.floor(Math.random() * objects.length)];
+      const symbol = symbols[Math.floor(Math.random() * symbols.length)];
+      const bukowskiScore = Math.floor(Math.random() * 101);
+      const baconScore = Math.floor(Math.random() * 101);
       const quote = quotes[Math.floor(Math.random() * quotes.length)];
-      const score = Math.floor(Math.random() * 101);
+      const includeQuote = Math.random() < 0.75;
 
-      currentPrompt = `A charcoal portrait in the emotional and distorted style of Francis Bacon, fused with the bleak realism of Charles Bukowski's world.\nScene: ${scene}.\nMood: ${emotion}.\nSymbol: ${object}.\nBukowski Intensity: ${score}/100.\n\nUse textures that resemble scratched chalk on dark concrete. Prioritize realism with abstract intensity, evoking the loneliness of late-night confessionals.\n\nQuote: ${quote}`;
+      currentPrompt =
+        `A charcoal portrait in the emotional and distorted style of Francis Bacon, fused with the bleak realism of Charles Bukowski's world.\n` +
+        `Scene: ${scene}.\nMood: ${emotion}.\nSymbol: ${symbol}.\n` +
+        `Bukowski Intensity: ${bukowskiScore}/100.\nBacon Intensity: ${baconScore}/100.\n\n` +
+        `Use textures that resemble scratched chalk on dark concrete. Prioritize realism with abstract intensity, evoking the loneliness of late-night confessionals.`;
+
+      if (includeQuote) {
+        currentPrompt += `\n\nQuote: ${quote}`;
+      }
 
       document.getElementById("promptOutput").innerText = currentPrompt;
       document.getElementById("imageOutput").style.display = "none";
@@ -119,9 +156,9 @@
 
       const data = await response.json();
       if (data && data.url) {
-        const image = document.getElementById("imageOutput");
-        image.src = data.url;
-        image.style.display = "block";
+        const img = document.getElementById("imageOutput");
+        img.src = data.url;
+        img.style.display = "block";
       } else {
         alert("Failed to generate image.");
         console.error(data);
