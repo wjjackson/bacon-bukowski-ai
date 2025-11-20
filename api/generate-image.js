@@ -40,7 +40,8 @@ module.exports = async (req, res) => {
 
     res.status(200).json({ url });
   } catch (error) {
-    console.error("OpenAI image error:", error);
+    const message = error?.message || "Unknown error";
+    console.error("OpenAI image error:", message);
     res.status(500).json({ error: message });
   }
 };
