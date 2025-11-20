@@ -41,42 +41,42 @@
     let currentPrompt = '';
 
     const scenes = [
-      "a decaying motel room littered with crushed cigarettes",
-      "an alleyway flickering under a dying neon light",
-      "a bar booth soaked in spilled whiskey",
-      "a hospital corridor where dreams go to rot",
-      "a stairwell echoing broken poetry",
-      "an abandoned gas station under a bruised sky",
-      "a butcher's table of regrets",
-      "a subway tunnel filled with lost thoughts",
-      "a hotel mirror reflecting nothing real",
-      "a rain‑drenched rooftop where hope once jumped"
+      "a faded motel room with old postcards",
+      "an alleyway under neon light drizzle",
+      "a quiet bar corner at closing time",
+      "a hallway lined with forgotten paintings",
+      "a stairwell bathed in dusty amber light",
+      "an old gas station lost in twilight",
+      "a butcher's shop closed for decades",
+      "a subway platform echoing old jazz",
+      "a hotel mirror catching memories",
+      "a rainy rooftop hiding stories"
     ];
 
     const emotions = [
       "melancholic defiance",
-      "wrathful numbness",
-      "drunken clarity",
+      "gentle resignation",
+      "quiet introspection",
       "grimy nostalgia",
-      "existential detachment",
-      "manic sorrow",
+      "reflective detachment",
+      "soft longing",
       "wilted pride",
-      "savage calm",
+      "fragile calm",
       "dizzy regret",
       "cynical warmth"
     ];
 
     const objects = [
-      "a smoldering cigarette",
-      "an empty glass with lipstick stains",
-      "a torn letter never sent",
-      "an ashtray overflowing with yesterdays",
-      "a typewriter bleeding ink",
-      "a broken light bulb humming softly",
-      "a figure with a face half erased",
-      "a pair of shoes facing the wall",
-      "a rat chewing on memory scraps",
-      "a single chalk line around nothing"
+      "a glowing cigarette",
+      "an empty glass with lipstick marks",
+      "a crumpled unsent letter",
+      "an overflowing ashtray",
+      "a typewriter mid-sentence",
+      "a dim lightbulb hanging low",
+      "a shadowy figure half-seen",
+      "shoes left by the door",
+      "a rat near an old newspaper",
+      "a chalk outline fading on pavement"
     ];
 
     function generatePrompt() {
@@ -85,7 +85,7 @@
       const object = objects[Math.floor(Math.random() * objects.length)];
       const score = Math.floor(Math.random() * 101);
 
-      currentPrompt = `A surreal portrait in the style of Francis Bacon, drawn in expressive charcoal with bruised colored chalk accents.\nScene: ${scene}.\nEmotional Tone: ${emotion}.\nSymbolic Element: ${object}.\nBukowski Intensity Scale: ${score}/100.\n\nThe image should feature distorted human anatomy, violent mark‑making, and shadow‑heavy textures. Use greyscale with accents in blood red, nicotine yellow, and purple bruises. Let the composition echo the defiance, poetry, and inner collapse of a whiskey‐soaked writer at the edge of the world.`;
+      currentPrompt = `An abstract portrait in the expressive style of Francis Bacon, using charcoal and pastel chalk.\nScene: ${scene}.\nMood: ${emotion}.\nFocus: ${object}.\nBukowski Vibe Index: ${score}/100.\n\nVisual style should explore raw textures, moody lighting, and emotional contrast — using mostly grayscale with soft red, yellow, and purple hues for accent. Emphasize feeling over realism, evoking poetic inner conflict with rough, gestural marks.`;
 
       document.getElementById("promptOutput").innerText = currentPrompt;
       document.getElementById("imageOutput").src = '';
