@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Bacon x Bukowski Image Generator</title>
+  <style>
+    body {
+      font-family: monospace;
+      background: #111;
+      color: #eee;
+      padding: 2rem;
+    }
+    button {
+      margin-right: 1rem;
+      padding: 0.6rem 1.2rem;
+      font-size: 1rem;
+      background: #444;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+    #promptOutput {
+      margin-top: 2rem;
+      white-space: pre-wrap;
+    }
+    #imageOutput {
+      margin-top: 2rem;
+      max-width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <h1>Charcoal + Chalk – Bacon x Bukowski</h1>
+  <button onclick="generatePrompt()">Generate Prompt</button>
+  <button onclick="generateImage()">Generate Image</button>
+
+  <div id="promptOutput"></div>
+  <img id="imageOutput" src="" alt="Generated image will appear here" />
+
+  <script>
+    let currentPrompt = '';
+
+    const scenes = [
+      "a decaying motel room littered with crushed cigarettes",
+      "an alleyway flickering under a dying neon light",
+      "a bar booth soaked in spilled whiskey",
+      "a hospital corridor where dreams go to rot",
+      "a stairwell echoing broken poetry",
+      "an abandoned gas station under a bruised sky",
+      "a butcher's table of regrets",
+      "a subway tunnel filled with lost thoughts",
+      "a hotel mirror reflecting nothing real",
+      "a rain‑drenched rooftop where hope once jumped"
+    ];
+
+    const emotions = [
+      "melancholic defiance",
+      "wrathful numbness",
+      "drunken clarity",
+      "grimy nostalgia",
+      "existential detachment",
+      "manic sorrow",
+      "wilted pride",
+      "savage calm",
+      "dizzy regret",
+      "cynical warmth"
+    ];
+
+    const objects = [
+      "a smoldering cigarette",
+      "an empty glass with lipstick stains",
+      "a torn letter never sent",
+      "an ashtray overflowing with yesterdays",
+      "a typewriter bleeding ink",
+      "a broken light bulb humming softly",
+      "a figure with a face half erased",
+      "a pair of shoes facing the wall",
+      "a rat chewing on memory scraps",
+      "a single chalk line around nothing"
+    ];
+
+    function generatePrompt() {
+      const scene = scenes[Math.floor(Math.random() * scenes.length)];
+      const emotion = emotions[Math.floor(Math.random() * emotions.length)];
+      const object = objects[Math.floor(Math.random() * objects.length)];
+      const score = Math.floor(Math.random() * 101);
+
+      currentPrompt = `A surreal portrait in the style of Francis Bacon, drawn in expressive charcoal with bruised colored chalk accents.\nScene: ${scene}.\nEmotional Tone: ${emotion}.\nSymbolic Element: ${object}.\nBukowski Intensity Scale: ${score}/100.\n\nThe image should feature distorted human anatomy, violent mark‑making, and shadow‑heavy textures. Use greyscale with accents in blood red, nicotine yellow, and purple bruises. Let the composition echo the defiance, poetry, and inner collapse of a whiskey‐soaked writer at the edge of the world.`;
+
+      document.getElementById("promptOutput").innerText = currentPrompt;
+      document.getElementById("imageOutput").src = '';
+    }
+
+    async function generateImage() {
+      if (!currentPrompt) {
+        alert("Generate a prompt first!");
+        return;
+      }
+
+      const response = await fetch("/api/generate-image", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ prompt: currentPrompt })
+      });
+
+      const data = await response.json();
+      if (data && data.url) {
+        document.getElementById("imageOutput").src = data.url;
+      } else {
+        alert("Failed to generate image.");
+        console.error(data);
+      }
+    }
+
+    window.onload = generatePrompt;
+  </script>
+</body>
+</html>
