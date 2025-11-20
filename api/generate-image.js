@@ -26,7 +26,7 @@ module.exports = async (req, res) => {
       body: JSON.stringify({
         prompt,
         n: 1,
-        size: "1920x1080"
+        size: "1024x1024"
       })
     });
 
