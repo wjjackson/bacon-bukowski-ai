@@ -1,7 +1,7 @@
 // api/generate-image.js
-import fetch from "node-fetch";
+const fetch = require('node-fetch');
 
-export default async function handler(req, res) {
+module.exports = async (req, res) => {
   if (req.method !== "POST") {
     res.status(405).send({ error: "Method not allowed" });
     return;
@@ -34,15 +34,15 @@ export default async function handler(req, res) {
     });
 
     const openaiData = await openaiRes.json();
-    const url = openaiData.data && openaiData.data[0] && openaiData.data[0].url;
+    const url = openaiData?.data?.[0]?.url;
 
     if (!url) {
       throw new Error("No image URL returned");
     }
 
-    res.status(200).send({ url });
+    res.status(200).json({ url });
   } catch (error) {
     console.error("OpenAI image error:", error);
-    res.status(500).send({ error: "Image generation failed" });
+    res.status(500).json({ error: "Image generation failed" });
   }
-}
+};
