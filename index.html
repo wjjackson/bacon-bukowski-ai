@@ -36,57 +36,67 @@
   <button onclick="generateImage()">Generate Image</button>
 
   <div id="promptOutput"></div>
-  <img id="imageOutput" src="" alt="Generated image" />
+  <img id="imageOutput" src="" alt="" />
 
   <script>
     let currentPrompt = '';
 
     const scenes = [
-      "a wooden desk with an antique typewriter",
-      "a shadowy bookshelf filled with worn books",
-      "a wine glass tipped on its side next to a crumpled paper",
-      "a solitary window with a woman staring into dusk",
-      "a camera resting on dusty velvet",
-      "a door frame hiding a blurred figure",
-      "a smoke-stained bar mirror reflecting a broken poet",
-      "an empty pen beside a dried ink well",
-      "a dim room filled with books and flickering candlelight",
-      "a mirror cracked across a weary self-portrait"
+      "a typewriter surrounded by cigarette smoke",
+      "a woman gazing out a cracked window at dusk",
+      "an old man slouched beside a flickering TV",
+      "a bookshelf drowning in dust and poetry",
+      "a self-portrait sketched in shadow behind a doorframe",
+      "a wine glass shattered on a motel carpet",
+      "a rain-soaked camera left on a fire escape",
+      "a pair of empty boots facing a mirror",
+      "a handwritten letter pinned to a corkboard with a knife",
+      "a naked lightbulb dangling over scattered pages"
     ];
 
     const emotions = [
-      "lonely wisdom",
-      "tired inspiration",
-      "inebriated longing",
-      "existential introspection",
-      "melancholic defiance",
-      "raw vulnerability",
-      "moody resignation",
-      "wistful detachment",
-      "intellectual despair",
-      "tender ache"
+      "gritty solitude",
+      "drunken confession",
+      "tender alienation",
+      "repressed fury",
+      "fugitive intimacy",
+      "haunted reverence",
+      "numb resistance",
+      "silent rage",
+      "bleeding vulnerability",
+      "disoriented love"
     ];
 
     const objects = [
-      "a smoldering cigarette",
-      "a vintage pen and notepad",
-      "an old camera with a broken lens",
-      "a torn photograph",
-      "a flickering match about to go out",
-      "an open book with a rose pressed inside",
-      "an empty bottle beside a stack of letters",
-      "a dusty window frame catching the last light",
-      "a cracked coffee mug",
-      "a mirror with a thumbprint in the dust"
+      "a broken typewriter",
+      "an overflowing ashtray",
+      "a half-empty bottle of red wine",
+      "a notebook with pages torn out",
+      "a shadow in a mirror",
+      "a pair of cracked glasses",
+      "a fountain pen leaking ink",
+      "a stack of worn Bukowski novels",
+      "a polaroid fading in sunlight",
+      "a key with no door"
+    ];
+
+    const quotes = [
+      `"Find what you love and let it kill you." – Bukowski`,
+      `"We are all born mad. Some remain so." – Bacon`,
+      `"Some people never go crazy. What truly horrible lives they must lead." – Bukowski`,
+      `"I paint to disturb people." – Bacon`,
+      `"You have to die a few times before you can really live." – Bukowski`,
+      `"The job of the artist is always to deepen the mystery." – Bacon`
     ];
 
     function generatePrompt() {
       const scene = scenes[Math.floor(Math.random() * scenes.length)];
       const emotion = emotions[Math.floor(Math.random() * emotions.length)];
       const object = objects[Math.floor(Math.random() * objects.length)];
+      const quote = quotes[Math.floor(Math.random() * quotes.length)];
       const score = Math.floor(Math.random() * 101);
 
-      currentPrompt = `Charcoal portrait, inspired by Francis Bacon’s expressive abstraction and Charles Bukowski’s gritty solitude.\n\nScene: ${scene}.\nMood: ${emotion}.\nSymbol: ${object}.\nBukowski Intensity Scale: ${score}/100.\n\nUse stark contrasts, heavy shadows, subtle chalk hues—blood red, tobacco brown, aged parchment yellow. Frame it like a song by Leonard Cohen or Led Zeppelin at their most haunting. Horizontal format, realistic and surreal in tension.`;
+      currentPrompt = `A charcoal portrait in the emotional and distorted style of Francis Bacon, fused with the bleak realism of Charles Bukowski's world.\nScene: ${scene}.\nMood: ${emotion}.\nSymbol: ${object}.\nBukowski Intensity: ${score}/100.\n\nUse textures that resemble scratched chalk on dark concrete. Prioritize realism with abstract intensity, evoking the loneliness of late-night confessionals.\n\nQuote: ${quote}`;
 
       document.getElementById("promptOutput").innerText = currentPrompt;
       document.getElementById("imageOutput").style.display = "none";
@@ -109,9 +119,9 @@
 
       const data = await response.json();
       if (data && data.url) {
-        const img = document.getElementById("imageOutput");
-        img.src = data.url;
-        img.style.display = "block";
+        const image = document.getElementById("imageOutput");
+        image.src = data.url;
+        image.style.display = "block";
       } else {
         alert("Failed to generate image.");
         console.error(data);
