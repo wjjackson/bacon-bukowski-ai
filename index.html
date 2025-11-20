@@ -163,6 +163,8 @@
         return;
       }
 
+      console.log("Submitting prompt:", currentPrompt); // ⬅️ Add this here
+
       const response = await fetch("/api/generate-image", {
         method: "POST",
         headers: {
