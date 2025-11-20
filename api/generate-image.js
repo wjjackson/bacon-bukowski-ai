@@ -3,20 +3,17 @@ const fetch = (...args) =>
 
 module.exports = async (req, res) => {
   if (req.method !== "POST") {
-    res.status(405).send({ error: "Method not allowed" });
-    return;
+    return res.status(405).json({ error: "Method not allowed" });
   }
 
   const { prompt } = req.body;
   if (!prompt) {
-    res.status(400).send({ error: "Prompt required" });
-    return;
+    return res.status(400).json({ error: "Prompt required" });
   }
 
   const apiKey = process.env.OPENAI_API_KEY;
   if (!apiKey) {
-    res.status(500).send({ error: "OpenAI API key not configured" });
-    return;
+    return res.status(500).json({ error: "OpenAI API key not configured" });
   }
 
   try {
@@ -40,8 +37,7 @@ module.exports = async (req, res) => {
 
     res.status(200).json({ url });
   } catch (error) {
-    const message = error?.message || "Unknown error";
-    console.error("OpenAI image error:", message);
-    res.status(500).json({ error: message });
+    console.error("OpenAI image error:", error);
+    res.status(500).json({ error: error?.message || "Image generation failed" });
   }
 };
