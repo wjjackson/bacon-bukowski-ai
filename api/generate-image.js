@@ -26,14 +26,12 @@ module.exports = async (req, res) => {
       body: JSON.stringify({
         prompt,
         n: 1,
-        size: "512x512"
+        size: "1920x1080"
       })
     });
 
     const openaiData = await openaiRes.json();
-    console.log("OpenAI response:", openaiData); // 👈 This line will help us debug
     console.log("OpenAI full response:", JSON.stringify(openaiData, null, 2));
-
 
     const url = openaiData?.data?.[0]?.url;
     if (!url) throw new Error("No image URL returned");

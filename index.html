@@ -26,6 +26,7 @@
     #imageOutput {
       margin-top: 2rem;
       max-width: 100%;
+      display: none;
     }
   </style>
 </head>
@@ -35,48 +36,48 @@
   <button onclick="generateImage()">Generate Image</button>
 
   <div id="promptOutput"></div>
-  <img id="imageOutput" src="" alt="Generated image will appear here" />
+  <img id="imageOutput" src="" alt="Generated image" />
 
   <script>
     let currentPrompt = '';
 
     const scenes = [
-      "a faded motel room with old postcards",
-      "an alleyway under neon light drizzle",
-      "a quiet bar corner at closing time",
-      "a hallway lined with forgotten paintings",
-      "a stairwell bathed in dusty amber light",
-      "an old gas station lost in twilight",
-      "a butcher's shop closed for decades",
-      "a subway platform echoing old jazz",
-      "a hotel mirror catching memories",
-      "a rainy rooftop hiding stories"
+      "a wooden desk with an antique typewriter",
+      "a shadowy bookshelf filled with worn books",
+      "a wine glass tipped on its side next to a crumpled paper",
+      "a solitary window with a woman staring into dusk",
+      "a camera resting on dusty velvet",
+      "a door frame hiding a blurred figure",
+      "a smoke-stained bar mirror reflecting a broken poet",
+      "an empty pen beside a dried ink well",
+      "a dim room filled with books and flickering candlelight",
+      "a mirror cracked across a weary self-portrait"
     ];
 
     const emotions = [
+      "lonely wisdom",
+      "tired inspiration",
+      "inebriated longing",
+      "existential introspection",
       "melancholic defiance",
-      "gentle resignation",
-      "quiet introspection",
-      "grimy nostalgia",
-      "reflective detachment",
-      "soft longing",
-      "wilted pride",
-      "fragile calm",
-      "dizzy regret",
-      "cynical warmth"
+      "raw vulnerability",
+      "moody resignation",
+      "wistful detachment",
+      "intellectual despair",
+      "tender ache"
     ];
 
     const objects = [
-      "a glowing cigarette",
-      "an empty glass with lipstick marks",
-      "a crumpled unsent letter",
-      "an overflowing ashtray",
-      "a typewriter mid-sentence",
-      "a dim lightbulb hanging low",
-      "a shadowy figure half-seen",
-      "shoes left by the door",
-      "a rat near an old newspaper",
-      "a chalk outline fading on pavement"
+      "a smoldering cigarette",
+      "a vintage pen and notepad",
+      "an old camera with a broken lens",
+      "a torn photograph",
+      "a flickering match about to go out",
+      "an open book with a rose pressed inside",
+      "an empty bottle beside a stack of letters",
+      "a dusty window frame catching the last light",
+      "a cracked coffee mug",
+      "a mirror with a thumbprint in the dust"
     ];
 
     function generatePrompt() {
@@ -85,9 +86,10 @@
       const object = objects[Math.floor(Math.random() * objects.length)];
       const score = Math.floor(Math.random() * 101);
 
-      currentPrompt = `An abstract portrait in the expressive style of Francis Bacon, using charcoal and pastel chalk.\nScene: ${scene}.\nMood: ${emotion}.\nFocus: ${object}.\nBukowski Vibe Index: ${score}/100.\n\nVisual style should explore raw textures, moody lighting, and emotional contrast — using mostly grayscale with soft red, yellow, and purple hues for accent. Emphasize feeling over realism, evoking poetic inner conflict with rough, gestural marks.`;
+      currentPrompt = `Charcoal portrait, inspired by Francis Bacon’s expressive abstraction and Charles Bukowski’s gritty solitude.\n\nScene: ${scene}.\nMood: ${emotion}.\nSymbol: ${object}.\nBukowski Intensity Scale: ${score}/100.\n\nUse stark contrasts, heavy shadows, subtle chalk hues—blood red, tobacco brown, aged parchment yellow. Frame it like a song by Leonard Cohen or Led Zeppelin at their most haunting. Horizontal format, realistic and surreal in tension.`;
 
       document.getElementById("promptOutput").innerText = currentPrompt;
+      document.getElementById("imageOutput").style.display = "none";
       document.getElementById("imageOutput").src = '';
     }
 
@@ -107,7 +109,9 @@
 
       const data = await response.json();
       if (data && data.url) {
-        document.getElementById("imageOutput").src = data.url;
+        const img = document.getElementById("imageOutput");
+        img.src = data.url;
+        img.style.display = "block";
       } else {
         alert("Failed to generate image.");
         console.error(data);
