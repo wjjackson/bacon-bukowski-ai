@@ -1,4 +1,5 @@
-const fetch = require('node-fetch');
+const fetch = (...args) =>
+  import('node-fetch').then(({ default: fetch }) => fetch(...args));
 
 module.exports = async (req, res) => {
   if (req.method !== "POST") {
@@ -35,9 +36,7 @@ module.exports = async (req, res) => {
     const openaiData = await openaiRes.json();
     const url = openaiData?.data?.[0]?.url;
 
-    if (!url) {
-      throw new Error("No image URL returned");
-    }
+    if (!url) throw new Error("No image URL returned");
 
     res.status(200).json({ url });
   } catch (error) {
