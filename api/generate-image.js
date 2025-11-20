@@ -41,6 +41,6 @@ module.exports = async (req, res) => {
     res.status(200).json({ url });
   } catch (error) {
     console.error("OpenAI image error:", error);
-    res.status(500).json({ error: "Image generation failed" });
+    res.status(500).json({ error: message });
   }
 };
