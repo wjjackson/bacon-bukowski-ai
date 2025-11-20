@@ -1,0 +1,24 @@
+{
+  "name": "bacon-bukowski-ai",
+  "version": "1.0.0",
+  "description": "1. Create a GitHub repo and add these files\r 2. Go to [vercel.com](https://vercel.com) and import that repo\r 3. In Vercel → Settings → Environment Variables:\r    - Key: `OPENAI_API_KEY`\r    - Value: (your secret OpenAI API key)\r 4. Click Redeploy\r 5. Visit your live site — it should now generate art prompts AND images 🎨",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wjjackson/bacon-bukowski-ai.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/wjjackson/bacon-bukowski-ai/issues"
+  },
+  "homepage": "https://github.com/wjjackson/bacon-bukowski-ai#readme",
+  "dependencies": {
+    "node-fetch": "^3.3.2"
+  }
+}
